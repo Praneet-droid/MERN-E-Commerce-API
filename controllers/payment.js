@@ -2,14 +2,17 @@ const Payment  = require("../models/payment");
 const Razorpay = require("razorpay");
 const dotenv =require('dotenv');
 
+dotenv.config();
+
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-const checkout = async (req, res) => {
-  const { amount, cartItems, userShipping, userId } = req.body;
 
+const checkout = async (req, res) => {
+  
+  const { amount, cartItems, userShipping, userId } = req.body;
   try {
     const { amount, cartItems, userShipping, userId } = req.body;
 
@@ -22,7 +25,7 @@ const checkout = async (req, res) => {
     // Create the Razorpay order
     const order = await razorpay.orders.create(options);
 
-    console.log(order);
+    
 
     // Send a successful response back to the client
     res.json({
